@@ -1,0 +1,61 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Task Manager</h1>
+        <button id="themeToggle">
+            Toggle Theme
+        </button>
+    </header>
+    <Section class="task-form">
+        <h2>Add Task</h2>
+        <input type="text" id="title" placeholder="Task Title">
+        <textarea id="description" placeholder="Task Description"></textarea>
+
+        <Select id="priority">
+            <option value="low">Low Priority</option>
+            <option value="medium">Medium Priority</option>
+            <option value="high">High Priority</option>
+        </Select>
+
+        <Select id="category">
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Urgent">Urgent</option>
+        </Select>
+
+        <button id="addTask">Add / Update Task</button>
+
+        <p id="error"></p>
+    </Section>
+    <section class="controls">
+
+        <input type="text" id="search" placeholder="Search tasks">
+
+        <select id="filterCategory">
+            <option value="all">All Categories</option>
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Urgent">Urgent</option>
+        </select>
+
+        <button id="sortPriority">Sort By Priority</button>
+
+    </section>
+
+    <div id="notification"></div>
+
+    <ul id="taskList"></ul>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
