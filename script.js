@@ -56,7 +56,8 @@ class TaskManager {
         return this.tasks.filter(t => t.category === category)
     }
 
-    searchTasks(keyword) {
+    searchTasks(keyword, category = "all") {
+        let tasksToSearch = this.filterByCategory(category)
         return this.tasks.filter(t => t.title.toLowerCase().includes(keyword.toLowerCase()) ||
             t.description.toLowerCase().includes(keyword.toLowerCase()))
     }
@@ -83,15 +84,11 @@ const notification = document.getElementById("notification")
 
 
 function showNotification(message) {
-
     notification.innerText = message
-
     notification.style.display = "block"
 
     setTimeout(() => {
-
-        notification.style.display = "none"
-
+        notification.style.display = "none";
     }, 4000)
 
 }
@@ -99,32 +96,25 @@ function showNotification(message) {
 
 
 function renderTasks(tasks) {
-
     taskList.innerHTML = ""
-
     tasks.forEach(task => {
-
         const li = document.createElement("li")
-
         li.className = `task ${task.priority} ${task.completed ? "completed" : ""}`
 
         li.innerHTML = `
-
-<h3>${task.title}</h3>
-
-<p>${task.description}</p>
-
-<p>Priority: ${task.priority}</p>
-
-<p>Category: ${task.category}</p>
-
-<button onclick="completeTask(${task.id})">Complete</button>
-
-<button onclick="editTask(${task.id})">Edit</button>
-
-<button onclick="deleteTask(${task.id})">Delete</button>
-
+        <h3>${task.title}</h3>
+        <p>${task.description}</p>
+        <p>Priority: ${task.priority}</p>
+        <p>Category: ${task.category}</p>
+        <button onclick="completeTask(${task.id})">Complete</button>
+        <button onclick="editTask(${task.id})">Edit</button>
+        <button onclick="deleteTask(${task.id})">Delete</button>
 `
+        li.querySelector(".complete-btn").addEventListener("click", () => completeTask(task.id));
+        li.querySelector(".edit-btn").addEventListener("click", () => editTask(task.id));
+        li.querySelector(".delete-btn").addEventListener("click", () => deleteTask(task.id));
+
+
 
         taskList.appendChild(li)
 
@@ -135,41 +125,28 @@ function renderTasks(tasks) {
 
 
 document.getElementById("addTask").addEventListener("click", () => {
-
     const title = document.getElementById("title").value
-
     const description = document.getElementById("description").value
-
     const priority = document.getElementById("priority").value
-
     const category = document.getElementById("category").value
 
     if (title.trim() === "") {
-
         document.getElementById("error").innerText = "Title cannot be empty"
-
         return
 
     }
 
     if (editingTaskId) {
-
         manager.updateTask(editingTaskId, { title, description, priority, category })
-
         editingTaskId = null
-
         showNotification("Task updated")
-
+        editingTaskId = null;
     }
 
     else {
-
         const task = new Task(title, description, priority, category)
-
         manager.addTask(task)
-
         if (priority === "high") {
-
             showNotification("High priority task added!")
 
         }
