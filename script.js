@@ -1,4 +1,3 @@
-// ======= Task Class =======
 class Task {
     constructor(title, description, priority, category) {
         this.id = Date.now();
