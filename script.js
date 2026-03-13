@@ -146,15 +146,11 @@ document.getElementById("addTask").addEventListener("click", () => {
     else {
         const task = new Task(title, description, priority, category)
         manager.addTask(task)
-        if (priority === "high") {
-            showNotification("High priority task added!")
-
-        }
+        if (priority === "high") showNotification("High priority task added!")
 
     }
 
     renderTasks(manager.getTasks())
-
     clearForm()
 
 })
@@ -162,49 +158,32 @@ document.getElementById("addTask").addEventListener("click", () => {
 
 
 function deleteTask(id) {
-
     manager.deleteTask(id)
-
     renderTasks(manager.getTasks())
-
 }
 
 
 
 function completeTask(id) {
-
     let task = manager.tasks.find(t => t.id === id)
-
     if (task) {
-
         task.toggleComplete()
-
         saveTasks()
-
         if (task.priority === "high") {
-
             showNotification("High priority task completed!")
 
         }
-
     }
 
     renderTasks(manager.getTasks())
 
 }
 
-
-
 function editTask(id) {
-
-    let task = manager.tasks.find(t => t.id === id)
-
+    const task = manager.tasks.find(t => t.id === id)
     document.getElementById("title").value = task.title
-
     document.getElementById("description").value = task.description
-
     document.getElementById("priority").value = task.priority
-
     document.getElementById("category").value = task.category
 
     editingTaskId = id
@@ -214,18 +193,18 @@ function editTask(id) {
 
 
 function clearForm() {
-
     document.getElementById("title").value = ""
-
     document.getElementById("description").value = ""
+    document.getElementById("error").innerText = ""
 
 }
 
 
 
 document.getElementById("search").addEventListener("input", (e) => {
-
-    const results = manager.searchTasks(e.target.value)
+    const keyword = e.target.value
+    const category = document.getElementById("filterCategory").value
+    const results = manager.searchTasks(keyword, category)
 
     renderTasks(results)
 
@@ -234,10 +213,9 @@ document.getElementById("search").addEventListener("input", (e) => {
 
 
 document.getElementById("filterCategory").addEventListener("change", (e) => {
+    const
 
-    const filtered = manager.filterByCategory(e.target.value)
-
-    renderTasks(filtered)
+        renderTasks(filtered)
 
 })
 
