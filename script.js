@@ -156,20 +156,20 @@ document.getElementById("addTask").addEventListener("click", () => {
 })
 
 
-
+//--- Delete Task--//
 function deleteTask(id) {
     manager.deleteTask(id)
     renderTasks(manager.getTasks())
 }
 
 
-
+//--- Complete Task--//
 function completeTask(id) {
     let task = manager.tasks.find(t => t.id === id)
     if (task) {
         task.toggleComplete()
         saveTasks()
-        if (task.priority === "high") {
+        if (task.priority === "high" && task.completed) {
             showNotification("High priority task completed!")
 
         }
@@ -178,6 +178,8 @@ function completeTask(id) {
     renderTasks(manager.getTasks())
 
 }
+
+//--- Edit Task--//
 
 function editTask(id) {
     const task = manager.tasks.find(t => t.id === id)
@@ -199,7 +201,7 @@ function clearForm() {
 
 }
 
-
+//--- Search Task--//
 
 document.getElementById("search").addEventListener("input", (e) => {
     const keyword = e.target.value
@@ -211,20 +213,20 @@ document.getElementById("search").addEventListener("input", (e) => {
 })
 
 
-
+//--- Filter by category Task--//
 document.getElementById("filterCategory").addEventListener("change", (e) => {
-    const
+    const category = e.target.value
+    const keyword = document.getElementById("search").value
+    const results = manager.searchTasks(keyword, category)
 
-        renderTasks(filtered)
+    renderTasks(results)
 
 })
 
 
-
+//--- Sort by Priority Task--//
 document.getElementById("sortPriority").addEventListener("click", () => {
-
     manager.sortByPriority()
-
     renderTasks(manager.getTasks())
 
 })
@@ -232,15 +234,13 @@ document.getElementById("sortPriority").addEventListener("click", () => {
 
 
 document.getElementById("themeToggle").addEventListener("click", () => {
-
     document.body.classList.toggle("dark")
 
 })
 
 
-
+//--- Local Storage--//
 function saveTasks() {
-
     localStorage.setItem("tasks", JSON.stringify(manager.tasks))
 
 }
@@ -248,13 +248,9 @@ function saveTasks() {
 
 
 function loadTasks() {
-
     const saved = JSON.parse(localStorage.getItem("tasks"))
-
     if (saved) {
-
         manager.tasks = saved
-
         renderTasks(manager.tasks)
 
     }
