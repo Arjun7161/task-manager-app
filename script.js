@@ -1,36 +1,40 @@
 class Task {
     constructor(title, description, priority, category) {
 
-        this.id = Date.now()
+        this.id = Date.now();
 
-        this.title = title
-        this.description = description
-        this.priority = priority
-        this.category = category
-        this.completed = false
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.category = category;
+        this.completed = false;
 
     }
 
     toggleComplete() {
 
-        this.completed = !this.completed
+        this.completed = !this.completed;
     }
 
 }
 
 class TaskManager {
     constructor() {
-        this.tasks = []
+        this.tasks = [];
     }
 
     addTask(task) {
-        this.tasks.push(task)
-        saveTasks()
+        this.tasks.push(task);
+        saveTasks();
     }
 
     deleteTask(id) {
-        this.tasks = this.tasks.filter(t => t.id === id)
+        this.tasks = this.tasks.filter(task => task.id === id);
+        saveTasks();
+    }
 
+    updateTask(id, newData) {
+        const task = this.tasks.find(t => t.id === id);
         if (task) {
             task.title = newData.title
             task.description = newData.description
@@ -39,7 +43,7 @@ class TaskManager {
 
         }
 
-        saveTasks()
+        saveTasks();
     }
 
     getTasks() {
