@@ -65,7 +65,6 @@ class TaskManager {
 
 const manager = new TaskManager();
 let editingTaskId = null;
-
 const taskList = document.getElementById("taskList");
 const notification = document.getElementById("notification");
 
@@ -86,12 +85,12 @@ function renderTasks(tasks) {
 
         li.innerHTML = `
         <h3>${task.title}</h3>
-        <p>${task.description}</p>
-        <p>Priority: ${task.priority}</p>
-        <p>Category: ${task.category}</p>
+<p>${task.description}</p>
+       <p>Priority: ${task.priority}</p>
+    <p>Category: ${task.category}</p>
         <button class="complete-btn">Complete</button>
         <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+     <button class="delete-btn">Delete</button>
         `;
 
 
@@ -103,7 +102,7 @@ function renderTasks(tasks) {
     });
 }
 
-// ======= Add / Update Task =======
+// == Add / Update Task =
 document.getElementById("addTask").addEventListener("click", () => {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
@@ -129,7 +128,7 @@ document.getElementById("addTask").addEventListener("click", () => {
     clearForm();
 });
 
-// ======= Delete Task =======
+// ======= Delete Task ==
 function deleteTask(id) {
     manager.deleteTask(id);
     renderTasks(manager.getTasks());
@@ -176,7 +175,6 @@ document.getElementById("search").addEventListener("input", (e) => {
     renderTasks(results);
 });
 
-// ======= Filter by Category =======
 document.getElementById("filterCategory").addEventListener("change", (e) => {
     const category = e.target.value;
     const keyword = document.getElementById("search").value;
@@ -184,13 +182,13 @@ document.getElementById("filterCategory").addEventListener("change", (e) => {
     renderTasks(results);
 });
 
-// ======= Sort by Priority =======
+
 document.getElementById("sortPriority").addEventListener("click", () => {
     manager.sortByPriority();
     renderTasks(manager.getTasks());
 });
 
-// ======= Theme Toggle =======
+
 document.getElementById("themeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
 });
