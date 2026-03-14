@@ -66,6 +66,11 @@ button:hover {
     background: #2c2c2c;
 }
 
+.dark #notification {
+    background: rgb(4, 0, 255);
+    color: white;
+}
+
 .completed {
     text-decoration: line-through;
     opacity: 0.6;
@@ -85,12 +90,18 @@ button:hover {
 
 #notification {
     position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #333;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+    top: 50px;
+    left: 50px;
+    background: #ffffff;
+    color: #333;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    text-align: center;
+    min-width: 250px;
     display: none;
 }
 
